@@ -66,6 +66,7 @@ MetaParams::MetaParams() {
 	bBonjour = true;
 	bAllowPing = true;
 	bCertRequired = false;
+	bRequireCAMatch = false;
 
 	iBanTries = 10;
 	iBanTimeframe = 120;
@@ -229,6 +230,7 @@ void MetaParams::read(QString fname) {
 	iMaxUsersPerChannel = qsSettings->value("usersperchannel", iMaxUsersPerChannel).toInt();
 	qsWelcomeText = qsSettings->value("welcometext", qsWelcomeText).toString();
 	bCertRequired = qsSettings->value("certrequired", bCertRequired).toBool();
+	bRequireCAMatch = qsSettings->value("requireca", bRequireCAMatch).toBool();
 
 	qsDatabase = qsSettings->value("database", qsDatabase).toString();
 
@@ -411,6 +413,7 @@ void MetaParams::read(QString fname) {
 	qmConfig.insert(QLatin1String("username"),qrUserName.pattern());
 	qmConfig.insert(QLatin1String("channelname"),qrChannelName.pattern());
 	qmConfig.insert(QLatin1String("certrequired"), bCertRequired ? QLatin1String("true") : QLatin1String("false"));
+	qmConfig.insert(QLatin1String("requireca"), bRequireCAMatch ? QLatin1String("true") : QLatin1String("false"));
 }
 
 Meta::Meta() {
